@@ -1,6 +1,6 @@
-# RIPIA-Core 📌
+# IPMD-core 📌
 
-Redundant Image Pixel Information Anchor
+Image Pixel MetaData
 
 ## The Problem:
 
@@ -8,7 +8,7 @@ When you send a photo through WhatsApp, or move it from your Device to another D
 
 ## The Solution:
 
-I built IPMD(Image Pixel MetaData) to fix this. Instead of putting the info in a hidden "backpack" (metadata) that apps can strip away, this tool pins the info directly into the image's "DNA" (the pixels).
+I built IPMD to fix this. Instead of putting the info in a hidden "backpack" (metadata) that apps can strip away, this tool pins the info directly into the image's "DNA" (the pixels).
 
 ## Why it's different:
 **It survives screenshots:** Since the data is in the pixels, the screenshot tool "photographs" the hidden data too.
@@ -20,6 +20,8 @@ I built IPMD(Image Pixel MetaData) to fix this. Instead of putting the info in a
 ## Quick Start:
 
 ```python
+from ipmd import RIPIA, RIPIAR
+
 # Save image with metadata pinned inside
 infos = {"_Time_": "|04/20/2026|", "_Name_": "Tuscott|"}
 image = RIPIA("photo.png", infos)

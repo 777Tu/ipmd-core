@@ -8,7 +8,7 @@ When you send a photo through WhatsApp, or move it from your Device to another D
 
 ## The Solution:
 
-I built RIPIA to fix this. Instead of putting the info in a hidden "backpack" (metadata) that apps can strip away, this tool pins the info directly into the image's "DNA" (the pixels).
+I built IPMD(Image Pixel MetaData) to fix this. Instead of putting the info in a hidden "backpack" (metadata) that apps can strip away, this tool pins the info directly into the image's "DNA" (the pixels).
 
 ## Why it's different:
 **It survives screenshots:** Since the data is in the pixels, the screenshot tool "photographs" the hidden data too.
@@ -17,3 +17,14 @@ I built RIPIA to fix this. Instead of putting the info in a hidden "backpack" (m
 
 **It survives cropping:** The code pins the same info in 3 different spots (25%, 50%, and 75% height). Even if you crop half the photo, the info stays.
 
+## Quick Start:
+
+```python
+# Save image with metadata pinned inside
+infos = {"_Time_": "|04/20/2026|", "_Name_": "Tuscott|"}
+image = RIPIA("photo.png", infos)
+image.save("photo_archived.png")
+
+# Get the original info back anytime
+extractor = RIPIAR("photo_archived.png")
+print(extractor.reveal())

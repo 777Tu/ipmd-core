@@ -5,7 +5,8 @@ setup(
     version="1.2.1",
     description="Image Pixel MetaData - Pin metadata into image pixels",
     author="777Tu",
-    packages=find_packages(),
+    packages=["ipmd"],
+    package_data={"ipmd": ["*.py"]},
     install_requires=["pillow"],
     
 )

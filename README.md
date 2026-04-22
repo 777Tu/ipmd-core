@@ -47,8 +47,7 @@ extractor = RIPIAR("photo_archived.png")
 print(extractor.reveal())
 ```
 ### Demo of how it works:
-[Demo video on Youtube]
-(https://youtu.be/LSUzlTra1_A?si=o1OJSCKH03yrN2Ge)
+[Demo video on Youtube](https://youtu.be/LSUzlTra1_A?si=o1OJSCKH03yrN2Ge)
 ## Roadmap 🧪
 ### Foundation (Done):
 

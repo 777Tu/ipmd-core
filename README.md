@@ -46,21 +46,32 @@ image.save("photo_archived.png")
 extractor = RIPIAR("photo_archived.png")
 print(extractor.reveal())
 ```
+## Command Line Usage (CLI):
+You can now use IPMD directly from your terminal without writing any extra Python scripts.
+### Anchoring data (Hiding info):
+To pin information into an image, use the --anchor (or -ach) command. You must provide the source image and a dictionary containing 'bash _Time_'and 'bash _Name_'.
+`bash
+python main.py --anchor --source "your_image.png" --information "{'_Time_': '|04/26/2026|', '_Name_': 'Tuscott|'}"
+`
+​* 'bash --source' / -src: Path to your PNG file.
+​* '--information / -info: The data dictionary (must use the pipe | format).
+​* --save / -sv (Optional): Custom name for the output file.
+
 ### Demo of how it works:
 [Demo video on Youtube](https://youtu.be/LSUzlTra1_A?si=o1OJSCKH03yrN2Ge)
-## Roadmap 🧪
+## Roadmap 
 ### Foundation (Done):
 
-**✅ Hide Information:** Successfully inject data into image pixels.
+** - [x] Hide Information:** Successfully inject data into image pixels.
 
-**✅ Triple Anchors:** Save info in 3 different spots for redundancy.
+** - [x] Triple Anchors:** Save info in 3 different spots for redundancy.
 
-**✅ Recover Data:** Extract the original info back with 100% accuracy.
+** - [x] Recover Data:** Extract the original info back with 100% accuracy.
 
 ### In Progress :
 
-**⛔ Crop Protection:** Make the tool find data even if the image is cut or cropped.
+** - [ ] Crop Protection:** Make the tool find data even if the image is cut or cropped.
 
-**⛔ Screenshot Sync:** Improve retrieval for images with extra size added.
+** - [ ] Screenshot Sync:** Improve retrieval for images with extra size added.
 
-**⛔ File Support:** Optimize logic to work better across many image formats.
+** - [ ] File Support:** Optimize logic to work better across many image formats.

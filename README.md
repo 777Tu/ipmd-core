@@ -60,13 +60,13 @@ python main.py --anchor --source "your_image.png" --information "{'_Time_': '|04
 `--source` / `-src:` Path to your PNG file.  
 `--information` / `-info:` The data dictionary (must use the pipe **|** format).  
 `--save` / `-sv` (**Optional**): Custom name for the output file.  
-> [!WARNING]
+> [!IMPORTANT]
 > To ensure the tool works correctly, please keep your entries within these limits:
 > - **Total Information:** Must be less than 45 characters in total.
 > - **_Name_:** Between 5 and 30 characters long.
 > - **_Time_:** Between 8 and 15 characters long.  
  
-### Retrieving Data (Extracting Info):  
+> ### Retrieving Data (Extracting Info):  
 To extract the hidden metadata from an IPMD-encoded image, use the `--retrieve` (or `-r`) command.  
 `python main.py --retrieve --retrievesource "your_image_ipmd.png"
 `  

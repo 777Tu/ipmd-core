@@ -55,8 +55,11 @@ To pin information into an image, use the **--anchor** (or **-ach**) command. Yo
 python main.py --anchor --source "your_image.png" --information "{'_Time_': '|04/26/2026|', '_Name_': 'Tuscott|'}"
 `  
 **--source** / **-src:** Path to your PNG file.  
-**--information / -info:** The data dictionary (must use the pipe | format).  
-**--save / -sv (Optional):** Custom name for the output file.  
+**--information** / **-info:** The data dictionary (must use the pipe **|** format).  
+**--save** / **-sv** (Optional): Custom name for the output file.  
+### Retrieving Data (Extracting Info):  
+To extract the hidden metadata from an IPMD-encoded image, use the `--retrieve` (or `-r`) command.  
+
 ### Demo of how it works:
 [Demo video on Youtube](https://youtu.be/LSUzlTra1_A?si=o1OJSCKH03yrN2Ge)
 ## Roadmap 

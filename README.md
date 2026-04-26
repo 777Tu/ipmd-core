@@ -46,22 +46,31 @@ image.save("photo_archived.png")
 extractor = RIPIAR("photo_archived.png")
 print(extractor.reveal())
 ```
-## Command Line Usage (CLI):
+[Demo video on Youtube](https://youtu.be/LSUzlTra1_A?si=o1OJSCKH03yrN2Ge)
+
+## Command Line Usage (CLI)
 You can now use IPMD directly from your terminal without writing any extra Python scripts.
 ### Anchoring data (Hiding info):
 To pin information into an image, use the `--anchor` (or `-ach`) command. You must provide the source image and a dictionary containing **\_Time\_** and **\_Name\_**.  
 #### Example:  
 `
-python main.py --anchor --source "your_image.png" --information "{'_Time_': '|04/26/2026|', '_Name_': 'Tuscott|'}"
+python main.py --anchor --source "your_image.png" --information "{'_Time_': '|04/26/2026|', '_Name_': 'Object-Name|'}"
 `  
+
 `--source` / `-src:` Path to your PNG file.  
 `--information` / `-info:` The data dictionary (must use the pipe **|** format).  
 `--save` / `-sv` (**Optional**): Custom name for the output file.  
+> [!WARNING]
+> To ensure the tool works correctly, please keep your entries within these limits:
+> - **Total Information:** Must be less than 45 characters in total.
+> - **_Name_:** Between 5 and 30 characters long.
+> - **_Time_:** Between 8 and 15 characters long.  
+ 
 ### Retrieving Data (Extracting Info):  
 To extract the hidden metadata from an IPMD-encoded image, use the `--retrieve` (or `-r`) command.  
-
-### Demo of how it works:
-[Demo video on Youtube](https://youtu.be/LSUzlTra1_A?si=o1OJSCKH03yrN2Ge)
+`python main.py --retrieve --retrievesource "your_image_ipmd.png"
+`  
+​`--retrievesource` / `-rsrc`: The image you want to extract info from.  
 ## Roadmap 
 ### Foundation (Done):
 

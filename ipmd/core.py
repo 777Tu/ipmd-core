@@ -209,53 +209,36 @@ class RIPIAR(RIPIA):
 				
 		return _3MapInfo_
 
+
+
 def ArgParser():
-    parse = _ARGP_.ArgumentParser(description="IPMD(Image Pixel MetaData)\nipmd i used to add info in image pixel.")
-    parse.add_argument("-ach", "--anchor", help="Anchor(ach) is used to add info in image pixel.", action="store_true")
-    parse.add_argument("-src","--source", help="Source(src) represent your source file.")
-    parse.add_argument("-info","--information", help="Information (info) is info to add in image.", type=literal_eval)
-    parse.add_argument("-sv","--save", help="Save(sv) save as", default=True)
+    parse = _ARGP_.ArgumentParser(description="IPMD (Image Pixel MetaData): A tool for hiding and extracting info within image pixels.")
+    parse.add_argument("-ach", "--anchor", help="Use this to embed info into the image pixels.", action="store_true")
+    parse.add_argument("-src", "--source", help="Path to the source image file.")
+    parse.add_argument("-info", "--information", help="The dictionary of info you want to hide (use '...' for the dict).", type=literal_eval)
+    parse.add_argument("-sv", "--save", help="Custom name to save the output file (optional).", default=True)
+    parse.add_argument("-r", "--retrieve", help="Use this to extract hidden info from an image.", action="store_true")
+    parse.add_argument("-rsrc", "--retrievesource", help="The image file you want to extract info from.")
 
-
-    
-    parse.add_argument("-r","--retrieve", help="--Retrieve(r) is used to retieve info from image.", action="store_true")
-    parse.add_argument("-rsrc","--retrievesource", help="RetrieveSource(rsrc) is source of image to retrieve info from.")
-
-    #arg = parse.parse_args()
     return parse.parse_args()
-    
-    if arg.anchor:
-        return "anchor", arg.source,arg.information,arg.save
-    elif arg.retrieve:
-        return "retrieve",arg.retrievesource
-    else:
-        return "Type [filename] --help, for more infomation."
-if __name__== "__main__":
-      """
-      if ArgParser()[0]=="anchor":
-          print("Anchor\n", ArgParser())
-      elif ArgParser()[0]=="retrieve":
-          print("Retrieve\n", ArgParser())
-      else:
-          print(ArgParser())
-"""
-      args = ArgParser()
-      if args.anchor:
-          info=args.information
-          src = args.source
-          svNm = None if args.save is True else args.save
-          ImgObject=RIPIA(src, info)
-          print(ImgObject.save(svNm))
-      elif args.retrieve:
-          src = args.retrievesource
-          ImgObject=RIPIAR(src)
-          print(ImgObject.reveal())
-          
 
-"""
-      info={"_Time_" : time.strftime("|%m/%d/%Y|"),
-			            "_Name_" : "Tuscott|"}
-      src, svNm = ArgParser()
-      test=RIPIA(src, info)
-      print(t, test.save(svNm))
-"""
+if __name__ == "__main__":
+    args = ArgParser()
+    if args.anchor:
+        if not args.source or not args.information:
+            print("Error: You need to provide --source and --info to anchor data.")
+        else:
+            info = args.information
+            src = args.source
+            svNm = None if args.save is True else args.save
+            ImgObject = RIPIA(src, info)
+            print(ImgObject.save(svNm))      
+    elif args.retrieve:
+        if not args.retrievesource:
+            print("Error: Provide --rsrc to retrieve data.")
+        else:
+            src = args.retrievesource
+            ImgObject = RIPIAR(src)
+            print(ImgObject.reveal())   
+    else:
+        print("Usage: Use --anchor to hide data or --retrieve to extract it. Type --help for full details.")

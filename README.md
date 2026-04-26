@@ -50,7 +50,7 @@ print(extractor.reveal())
 You can now use IPMD directly from your terminal without writing any extra Python scripts.
 ### Anchoring data (Hiding info):
 To pin information into an image, use the --anchor (or -ach) command. You must provide the source image and a dictionary containing **\_Time\_** and **\_Name\_**.  
-### Example:  
+#### Example:  
 `
 python main.py --anchor --source "your_image.png" --information "{'_Time_': '|04/26/2026|', '_Name_': 'Tuscott|'}"
 `  

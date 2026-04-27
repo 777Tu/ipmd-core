@@ -15,6 +15,7 @@ print(anchor.save()) #Auto save with original name + ipmd
 #### Output:  
 Save successful: [original_ipmd.png]
 ### IPMD(Original image with info):
+> Zoom to spot the info at 25%,50%,75% y,x
 ![Original_ipmd](original_ipmd.png)  
 ## Extracting Data(Retrieving info):  
 ```python

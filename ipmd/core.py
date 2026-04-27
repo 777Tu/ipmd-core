@@ -114,81 +114,79 @@ class RIPIA:
                     listPixel.append(newImgPixel)
                     currentImgPixel.pop(0)
                     currentAscPixel.pop(0)
-                asciilistPixel.append(listPixel)
-                listPixel = []
+            asciilistPixel.append(listPixel)
+            listPixel = []
 
-            asciilistPixel = [joined for bundle in asciilistPixel for joined in bundle]
-            asciiITuplePixel = [tuple(asciilistPixel[step: step + 3]) for step in range(0, len(asciilistPixel), 3)]
-            ascii3InfoPixel = [asciiITuplePixel[step: step + pixelLength] for step in range(0, len(asciiITuplePixel), pixelLength)]
-            return ascii3InfoPixel
+        asciilistPixel = [joined for bundle in asciilistPixel for joined in bundle]
+        asciiITuplePixel = [tuple(asciilistPixel[step: step + 3]) for step in range(0, len(asciilistPixel), 3)]
+        ascii3InfoPixel = [asciiITuplePixel[step: step + pixelLength] for step in range(0, len(asciiITuplePixel), pixelLength)]
+        return ascii3InfoPixel
 
-        def ImgInfoMap(self, img2DPixel, height, width):
-            _ascii_ = self.AsciiJoinedChunk()
-            totalAsciiLen = self.TotalInfoPixel()
-            imgHeight, imgWidth = height, width
-            lenInfoPixel = math.ceil(totalAsciiLen / 3)
-            _25Percent = math.ceil((imgHeight / 2) / 2)
-            _widthCenter = math.ceil(
+    def ImgInfoMap(self, img2DPixel, height, width):
+        _ascii_ = self.AsciiJoinedChunk()
+        totalAsciiLen = self.TotalInfoPixel()
+        imgHeight, imgWidth = height, width
+        lenInfoPixel = math.ceil(totalAsciiLen / 3)
+        _25Percent = math.ceil((imgHeight / 2) / 2)
+        _widthCenter = math.ceil(
                 (imgWidth / 2) - (lenInfoPixel / 2)) if imgWidth // 2 >= lenInfoPixel else 0
-            _img2DPixel_, _25Percent_, _widthCenter_ = img2DPixel, _25Percent, _widthCenter
-            _3Map_ = 3
-            _3MiddPixelForInfo_ = []
-            while _3Map_ > 0:
-                _current25PRow = _img2DPixel_[_25Percent_]
-                _currentMidd = _current25PRow[_widthCenter_:_widthCenter_ + lenInfoPixel]
-                _3MiddPixelForInfo_.append(_currentMidd)
-                _25Percent_ += _25Percent
-                _3Map_ -= 1
-            _imgPixelIToIPixel = self.AsciiToPixel(_3MiddPixelForInfo_)
-            return _imgPixelIToIPixel
+        _img2DPixel_, _25Percent_, _widthCenter_ = img2DPixel, _25Percent, _widthCenter
+        _3Map_ = 3
+        _3MiddPixelForInfo_ = []
+        while _3Map_ > 0:
+            _current25PRow = _img2DPixel_[_25Percent_]
+            _currentMidd = _current25PRow[_widthCenter_:_widthCenter_ + lenInfoPixel]
+            _3MiddPixelForInfo_.append(_currentMidd)
+            _25Percent_ += _25Percent
+            _3Map_ -= 1
+        _imgPixelIToIPixel = self.AsciiToPixel(_3MiddPixelForInfo_)
+        return _imgPixelIToIPixel
 
-        def Q3C_PixelITImg(self):
-            _img2D, _width, _height = self.IMAGE(self.imgFile)
-            _asciiPixelInfo = self.ImgInfoMap(_img2D, _height, _width)
-            totalAsciiLen = self.TotalInfoPixel()
-            imgHeight, imgWidth = _height, _width
-            lenInfoPixel = math.ceil(totalAsciiLen / 3)
-            _25Percent = math.ceil((imgHeight / 2) / 2)
-            _widthCenter = math.ceil(
-                (imgWidth / 2) - (lenInfoPixel / 2)) if imgWidth // 2 >= lenInfoPixel else 0
-            _img2DPixel_, _25Percent_, _widthCenter_ = _img2D, _25Percent, _widthCenter
-            _3Map_ = 3
-            _index_ = 0
+    def Q3C_PixelITImg(self):
+        _img2D, _width, _height = self.IMAGE(self.imgFile)
+        _asciiPixelInfo = self.ImgInfoMap(_img2D, _height, _width)
+        totalAsciiLen = self.TotalInfoPixel()
+        imgHeight, imgWidth = _height, _width
+        lenInfoPixel = math.ceil(totalAsciiLen / 3)
+        _25Percent = math.ceil((imgHeight / 2) / 2)
+        _widthCenter = math.ceil((imgWidth / 2) - (lenInfoPixel / 2)) if imgWidth // 2 >= lenInfoPixel else 0
+        _img2DPixel_, _25Percent_, _widthCenter_ = _img2D, _25Percent, _widthCenter
+        _3Map_ = 3
+        _index_ = 0
 
-            while _3Map_ > 0:
-                _current25PRow = _img2DPixel_[_25Percent_]
-                _current25PRow[_widthCenter_:_widthCenter_ +
-                               lenInfoPixel] = _asciiPixelInfo[_index_]
-                _img2DPixel_[_25Percent_] = _current25PRow
-                _25Percent_ += _25Percent
-                _index_ += 1
-                _3Map_ -= 1
-            _25Percent_ = _25Percent
-            return _img2DPixel_
+        while _3Map_ > 0:
+            _current25PRow = _img2DPixel_[_25Percent_]
+            _current25PRow[_widthCenter_:_widthCenter_ + lenInfoPixel] = _asciiPixelInfo[_index_]
+            _img2DPixel_[_25Percent_] = _current25PRow
+            _25Percent_ += _25Percent
+            _index_ += 1
+            _3Map_ -= 1
+        _25Percent_ = _25Percent
+        return _img2DPixel_
 
-        def _img2DT1D(self):
-            _img2DPixel = self.Q3C_PixelITImg()
-            _img1DPixel = [pixel for bundle in _img2DPixel for pixel in bundle]
-            return _img1DPixel
+    def _img2DT1D(self):
+        _img2DPixel = self.Q3C_PixelITImg()
+        _img1DPixel = [pixel for bundle in _img2DPixel for pixel in bundle]
+        return _img1DPixel
 
-        def save(self, saveName=None):
-            if saveName is not None and Path(saveName).suffix not in [".png"]:
-                raise ValueError(
+    def save(self, saveName=None):
+        if saveName is not None and Path(saveName).suffix not in [".png"]:
+            raise ValueError(
                     "\nRIPIA currently only supports PNG files to ensure data integrity.")
-            if saveName is None:
-                imgFile = self.imgFile
-                exten = imgFile[imgFile.rfind("."):]
-                saveName = imgFile[0:imgFile.find(".")] + "_ipmd" + exten
-            else:
-                imgFile = saveName
-                exten = imgFile[imgFile.rfind("."):]
-                saveName = imgFile[0:imgFile.find(".")] + "_ipmd" + exten
-            _imgFlat = self._img2DT1D()
-            _img = _IMG_.open(self.imgFile)
-            _imgInfo = _IMG_.new(_img.mode, (_img.size))
-            _imgInfo.putdata(_imgFlat)
-            _imgInfo.save(saveName)
-            return f"{saveName} save successful"
+        if saveName is None:
+            imgFile = self.imgFile
+            exten = imgFile[imgFile.rfind("."):]
+            saveName = imgFile[0:imgFile.find(".")] + "_ipmd" + exten
+        else:
+            imgFile = saveName
+            exten = imgFile[imgFile.rfind("."):]
+            saveName = imgFile[0:imgFile.find(".")] + "_ipmd" + exten
+        _imgFlat = self._img2DT1D()
+        _img = _IMG_.open(self.imgFile)
+        _imgInfo = _IMG_.new(_img.mode, (_img.size))
+        _imgInfo.putdata(_imgFlat)
+        _imgInfo.save(saveName)
+        return f"Save successful: [{saveName}]"
 
 
 class RIPIAR(RIPIA):
